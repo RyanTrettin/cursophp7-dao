@@ -73,5 +73,44 @@ class Usuario {
         
     }
 
+
+    public static function getList(){
+
+        $sql = new Sql();
+
+        return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin;");
+
+    }
+
+    public function login($login,$password){
+
+        $sql = new Sql();
+
+        $results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :USER AND dessenha = :SENHA ", array(
+
+            ":USER"=>$login,":SENHA"=>$password
+
+        ));
+
+        if (count($results) > 0){
+            
+            $row = $results[0];
+
+            $this->setIdusuario($row['idusuario']);
+            $this->setDeslogin($row["deslogin"]);
+            $this->setDessenha($row["dessenha"]);
+            $this->setDtcadastro(new DateTime($row["dtcadastro"]));
+
+            
+        }
+        else{
+
+            throw new Exception("Login ou senha incorretos!");
+
+        }
+    }   
+
+
+
 }   
 ?>
