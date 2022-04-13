@@ -10,10 +10,21 @@ require_once("config.php");
 //$lista = Usuario::getList();
 //echo json_encode($lista);
 
-$usuario = new Usuario();
+//busca Usuario com login e senha
 
-$usuario->login("Pedro Pinto","12344556");
+//$usuario = new Usuario();
+//$usuario->login("Pedro Pinto","12344556");
+//echo $usuario;
 
-echo $usuario;
+//Cadastra novo usuário com login e senha
+
+$aluno = new Usuario();
+
+$aluno->setDeslogin("Aluno");
+$aluno->setDessenha("12345");
+
+$aluno->insert();
+
+echo $aluno;
 
 ?>
